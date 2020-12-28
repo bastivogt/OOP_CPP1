@@ -1,8 +1,6 @@
 #include "counter2.h"
-#include "eventargs.h";
+#include "eventargs.h"
 
-#include <iostream>
-using namespace std;
 
 Counter2::Counter2(int start, int end, int step)
 {
@@ -14,7 +12,7 @@ int Counter2::getCount() {
 }
 
 // onCounterStart Event
-void Counter2::setOnCounterStart(void (*onCounterStart)(EventArgs args)) {
+void Counter2::setOnCounterStart(void (* onCounterStart)(EventArgs args)) {
     this->onCounterStart = onCounterStart;
 }
 
@@ -29,7 +27,7 @@ void Counter2::fireOnCounterStart(EventArgs args) {
 }
 
 // onCounterChange Event
-void Counter2::setOnCounterChange(void (*onCounterChange)(EventArgs args)) {
+void Counter2::setOnCounterChange(void (* onCounterChange)(EventArgs args)) {
     this->onCounterChange = onCounterChange;
 }
 
@@ -61,16 +59,13 @@ void Counter2::fireOnCounterFinish(EventArgs args) {
 
 
 void Counter2::run() {
-    //cout << "START" << endl;
     EventArgs e(this);
     this->fireOnCounterStart(e);
 
     for(; this->count < this->end; this->count += this->step) {
-        //cout << "CHANGE: " << this->count << endl;
         this->fireOnCounterChange(e);
     }
 
-    //cout << "FINISH" << endl;
     this->fireOnCounterFinish(e);
 }
 

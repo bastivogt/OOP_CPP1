@@ -72,16 +72,16 @@ void c_onCounterFinish(Counter * sender) {
 
 // Event Funktionen für Counter2
 void c2_onCounterStart(EventArgs args) {
-    Counter sender = * static_cast<Counter *>(args.sender);
+    Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_START count: " << sender.getCount() << endl;
 }
 
 void c2_onCounterChange(EventArgs args) {
-    Counter sender = * static_cast<Counter *>(args.sender);
+    Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_CHANGE count: " << sender.getCount() << endl;
 }
 
 void c2_onCounterFinish(EventArgs args) {
-    Counter sender = * static_cast<Counter *>(args.sender);
+    Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_FINISH count: " << sender.getCount() << endl;
 }

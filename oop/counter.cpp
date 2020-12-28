@@ -1,7 +1,5 @@
 #include "counter.h"
 
-#include <iostream>
-using namespace std;
 
 Counter::Counter(int start, int end, int step)
 {
@@ -13,7 +11,7 @@ int Counter::getCount() {
 }
 
 // onCounterStart Event
-void Counter::setOnCounterStart(void (*onCounterStart)(Counter * sender)) {
+void Counter::setOnCounterStart(void (* onCounterStart)(Counter * sender)) {
     this->onCounterStart = onCounterStart;
 }
 
@@ -28,7 +26,7 @@ void Counter::fireOnCounterStart(Counter * sender) {
 }
 
 // onCounterChange Event
-void Counter::setOnCounterChange(void (*onCounterChange)(Counter *)) {
+void Counter::setOnCounterChange(void (* onCounterChange)(Counter *)) {
     this->onCounterChange = onCounterChange;
 }
 
@@ -43,7 +41,7 @@ void Counter::fireOnCounterChange(Counter * sender) {
 }
 
 // onCounterFinish Event
-void Counter::setOnCounterFinish(void (*onCounterFinish)(Counter *)) {
+void Counter::setOnCounterFinish(void (* onCounterFinish)(Counter *)) {
     this->onCounterFinish = onCounterFinish;
 }
 
@@ -51,7 +49,7 @@ void Counter::removeOnCounterFinish() {
     this->onCounterFinish = nullptr;
 }
 
-void Counter::fireOnCounterFinish(Counter *sender) {
+void Counter::fireOnCounterFinish(Counter * sender) {
     if(this->onCounterFinish != nullptr) {
         this->onCounterFinish(sender);
     }
@@ -59,15 +57,12 @@ void Counter::fireOnCounterFinish(Counter *sender) {
 
 
 void Counter::run() {
-    //cout << "START" << endl;
     this->fireOnCounterStart(this);
 
     for(; this->count < this->end; this->count += this->step) {
-        //cout << "CHANGE: " << this->count << endl;
         this->fireOnCounterChange(this);
     }
 
-    //cout << "FINISH" << endl;
     this->fireOnCounterFinish(this);
 }
 
