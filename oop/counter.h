@@ -6,17 +6,17 @@
 class Counter
 {
 private:
-    int start;
-    int end;
-    int step;
-    int count;
-
     void (* onCounterStart)(Counter * sender) = nullptr;
     void (* onCounterChange)(Counter * sender) = nullptr;
     void (* onCounterFinish)(Counter * sender) = nullptr;
 
 
 protected:
+    int start;
+    int end;
+    int step;
+    int count;
+
     void fireOnCounterStart(Counter * sender);
     void fireOnCounterChange(Counter * sender);
     void fireOnCounterFinish(Counter * sender);

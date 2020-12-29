@@ -4,7 +4,7 @@
 #include "counter.h"
 #include "eventargs.h"
 #include "counter2.h"
-#include "countereventargs.h";
+#include "countereventargs.h"
 
 using namespace std;
 
@@ -42,11 +42,15 @@ int main()
 
     cout << "--------------------------------------------------------" << endl;
 
-    Counter2 c2(0, 10, 1);
+    Counter2 c2(0, 20, 2);
     c2.setOnCounterStart(& c2_onCounterStart);
     c2.setOnCounterChange(& c2_onCounterChange);
     //c2.removeOnCounterChange();
-    c2.setOnCounterFinish(& c2_onCounterFinish);
+    //c2.setOnCounterFinish(& c2_onCounterFinish);
+    c2.setOnCounterFinish([] (CounterEventArgs args) {
+        Counter2 sender = * static_cast<Counter2 *>(args.sender);
+        cout << "(LAMBDA) COUNTER2 ON_COUNTER_FINISH count: " << sender.getCount() << endl;
+    });
 
     c2.run();
 
@@ -73,17 +77,17 @@ void c_onCounterFinish(Counter * sender) {
 
 // Event Funktionen für Counter2
 void c2_onCounterStart(CounterEventArgs args) {
-    Counter sender = * static_cast<Counter * >(args.sender);
+    Counter2 sender = * static_cast<Counter2 * >(args.sender);
     cout << "Counter2 ON_COUNTER_START count: " << sender.getCount() << endl;
     cout << "Counter2 ON_COUNTER_START count: " << * args.count<< endl;
 }
 
 void c2_onCounterChange(CounterEventArgs args) {
-    Counter sender = * static_cast<Counter * >(args.sender);
+    Counter2 sender = * static_cast<Counter2 * >(args.sender);
     cout << "Counter2 ON_COUNTER_CHANGE count: " << sender.getCount() << endl;
 }
 
 void c2_onCounterFinish(CounterEventArgs args) {
-    Counter sender = * static_cast<Counter * >(args.sender);
+    Counter2 sender = * static_cast<Counter2 * >(args.sender);
     cout << "Counter2 ON_COUNTER_FINISH count: " << sender.getCount() << endl;
 }

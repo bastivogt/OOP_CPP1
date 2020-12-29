@@ -1,10 +1,11 @@
 #include "counter2.h"
-#include "eventargs.h"
 #include "countereventargs.h"
+
 
 
 Counter2::Counter2(int start, int end, int step)
 {
+
     this->reset(start, end, step);
 }
 
@@ -60,8 +61,6 @@ void Counter2::fireOnCounterFinish(CounterEventArgs args) {
 
 
 void Counter2::run() {
-    //EventArgs e(this);
-
     this->fireOnCounterStart(CounterEventArgs(this, & this->count));
 
     for(; this->count < this->end; this->count += this->step) {
