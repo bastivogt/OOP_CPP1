@@ -54,11 +54,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../oop/counter.cpp \
 		../oop/counter2.cpp \
+		../oop/countereventargs.cpp \
 		../oop/creature.cpp \
 		../oop/eventargs.cpp \
 		../oop/main.cpp 
 OBJECTS       = counter.o \
 		counter2.o \
+		countereventargs.o \
 		creature.o \
 		eventargs.o \
 		main.o
@@ -143,9 +145,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../oop/oop.pro counter.h \
 		counter2.h \
+		countereventargs.h \
 		creature.h \
 		eventargs.h ../oop/counter.cpp \
 		../oop/counter2.cpp \
+		../oop/countereventargs.cpp \
 		../oop/creature.cpp \
 		../oop/eventargs.cpp \
 		../oop/main.cpp
@@ -364,13 +368,17 @@ compiler_clean:
 
 ####### Compile
 
-counter.o: ../oop/counter.cpp ../oop/counter.h \
-		../oop/eventargs.h
+counter.o: ../oop/counter.cpp ../oop/counter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o counter.o ../oop/counter.cpp
 
 counter2.o: ../oop/counter2.cpp ../oop/counter2.h \
-		../oop/eventargs.h
+		../oop/eventargs.h \
+		../oop/countereventargs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o counter2.o ../oop/counter2.cpp
+
+countereventargs.o: ../oop/countereventargs.cpp ../oop/countereventargs.h \
+		../oop/eventargs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o countereventargs.o ../oop/countereventargs.cpp
 
 creature.o: ../oop/creature.cpp ../oop/creature.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o creature.o ../oop/creature.cpp
@@ -381,7 +389,8 @@ eventargs.o: ../oop/eventargs.cpp ../oop/eventargs.h
 main.o: ../oop/main.cpp ../oop/creature.h \
 		../oop/counter.h \
 		../oop/eventargs.h \
-		../oop/counter2.h
+		../oop/counter2.h \
+		../oop/countereventargs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../oop/main.cpp
 
 ####### Install

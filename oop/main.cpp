@@ -4,6 +4,7 @@
 #include "counter.h"
 #include "eventargs.h"
 #include "counter2.h"
+#include "countereventargs.h";
 
 using namespace std;
 
@@ -14,9 +15,9 @@ void c_onCounterFinish(Counter * sender);
 
 
 
-void c2_onCounterStart(EventArgs e);
-void c2_onCounterChange(EventArgs e);
-void c2_onCounterFinish(EventArgs e);
+void c2_onCounterStart(CounterEventArgs e);
+void c2_onCounterChange(CounterEventArgs e);
+void c2_onCounterFinish(CounterEventArgs e);
 
 
 
@@ -71,17 +72,18 @@ void c_onCounterFinish(Counter * sender) {
 
 
 // Event Funktionen für Counter2
-void c2_onCounterStart(EventArgs args) {
+void c2_onCounterStart(CounterEventArgs args) {
     Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_START count: " << sender.getCount() << endl;
+    cout << "Counter2 ON_COUNTER_START count: " << * args.count<< endl;
 }
 
-void c2_onCounterChange(EventArgs args) {
+void c2_onCounterChange(CounterEventArgs args) {
     Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_CHANGE count: " << sender.getCount() << endl;
 }
 
-void c2_onCounterFinish(EventArgs args) {
+void c2_onCounterFinish(CounterEventArgs args) {
     Counter sender = * static_cast<Counter * >(args.sender);
     cout << "Counter2 ON_COUNTER_FINISH count: " << sender.getCount() << endl;
 }
